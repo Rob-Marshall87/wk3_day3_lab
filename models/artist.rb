@@ -44,4 +44,17 @@ class Artist
     values = [@name, @id]
     SqlRunner.run(sql, values)
   end
+
+  def self.find(id)
+    sql = "SELECT FROM artists WHERE artist_id = $1"
+    values = [id]
+    album_hashes = SqlRunner.run(sql, values)
+    return album_hashes.map { |artist| Artist.new(artist) }
+  end
+  
+  def delete()
+    sql = "DELETE FROM artists where id = $1"
+    values = [@id]
+    SqlRunner.run(sql, values)
+  end
 end

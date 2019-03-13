@@ -30,15 +30,15 @@ class Album
   def self.all()
     sql = "SELECT * FROM albums"
     album_hashes = SqlRunner.run(sql)
-    return album_hashes.map { |album| Album.new(album)  }
+    return album_hashes.map { |album| Album.new(album) }
   end
 
-  # def self.find(artist_id)
-  #   sql = "SELECT FROM albums WHERE artist_id = $1"
-  #   values = [artist_id]
-  #   album_hashes = SqlRunner.run(sql, values)
-  #   return album_hashes.map { |album| Album.new(album)  }
-  # end
+  def self.find(id)
+    sql = "SELECT FROM albums WHERE album_id = $1"
+    values = [id]
+    album_hashes = SqlRunner.run(sql, values)
+    return album_hashes.map { |album| Album.new(album) }
+  end
 
   def self.delete_all
     sql = "DELETE FROM albums"
@@ -51,4 +51,11 @@ class Album
     values = [@title, @id]
     SqlRunner.run(sql, values)
   end
+
+  def delete()
+    sql = "DELETE FROM albums where id = $1"
+    values = [@id]
+    SqlRunner.run(sql, values)
+  end
+
 end
