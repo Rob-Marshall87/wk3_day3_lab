@@ -8,6 +8,7 @@ CREATE TABLE artists (
 
 CREATE TABLE albums (
   id SERIAL4 PRIMARY KEY,
-  titel VARCHAR(255),
+  title VARCHAR(255),
+  genre VARCHAR(255),
   artist_id INT4 REFERENCES artists(id) ON DELETE CASCADE
 );
